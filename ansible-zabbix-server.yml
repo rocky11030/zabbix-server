@@ -1,0 +1,6 @@
+---
+- hosts: zabbix_server
+  user: root
+  roles:
+  - ansible-zabbix-server
+  #- ../../ansible-zabbix-server

@@ -1,0 +1,5 @@
+[gitlab]
+10.2.8.223 ansible_ssh_user=root ansible_ssh_pass=Neunn2014@)!$
+
+[zabbix_server]
+10.2.8.230 ansible_ssh_user=root ansible_ssh_pass=neunn@2014

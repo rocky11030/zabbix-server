@@ -1,5 +1,11 @@
 ---
 # Tasks specific for RedHat systems
+- name: disabled the selinux
+  selinux: state=disabled
+
+- name: setenforce 0
+  shell: setenforce 0
+  ignore_errors: True
 
 - name: "RedHat | Use Zabbix package name"
   set_fact:
@@ -52,6 +58,7 @@
 - name: "RedHat | Installing zabbix-server-{{ database_type }}"
   yum:  pkg={{ zabbix_server_package }}
         state=present
+        update_cache=yes
   tags:
     - zabbix-server
 
@@ -73,17 +80,18 @@
   tags:
     - zabbix-server
 
-- name: "RedHat | Install Ansible module dependencies"
-  yum: name=python-psycopg2
-       state=present
-  when: zabbix_database_creation
-  tags:
-    - zabbix-server
+#- name: "RedHat | Install Ansible module dependencies"
+#  yum: name=python-psycopg2
+#       state=present
+#  when: zabbix_database_creation
+#  tags:
+#    - zabbix-server
 
 - name: "RedHat | Install Mysql Client package RHEL7"
   yum: name={{ item }}
        state=present
   with_items:
+    - mariadb-server
     - mariadb
     - MySQL-python
   when: database_type == 'mysql' and ansible_distribution_major_version == "7"
@@ -107,31 +115,31 @@
   tags:
     - zabbix-server
 
-- name: "RedHat | Install related SELinux package"
-  yum: name={{ item }}
-       state=present
-  with_items:
-    - libsemanage-python
-  when: zabbix_web or selinux_allow_zabbix_can_network
-  tags:
-    - zabbix-server
+#- name: "RedHat | Install related SELinux package"
+#  yum: name={{ item }}
+#       state=present
+#  with_items:
+#    - libsemanage-python
+#  when: zabbix_web or selinux_allow_zabbix_can_network
+#  tags:
+#    - zabbix-server
 
-- name: "RedHat | Enable httpd_can_connect_zabbix SELinux boolean"
-  seboolean: name={{ item }}
-             state=yes
-             persistent=yes
-  with_items:
-    - httpd_can_connect_zabbix
-  when: zabbix_web and selinux_allow_zabbix_can_http
-  tags:
-    - zabbix-server
+#- name: "RedHat | Enable httpd_can_connect_zabbix SELinux boolean"
+#  seboolean: name={{ item }}
+#             state=yes
+#             persistent=yes
+#  with_items:
+#    - httpd_can_connect_zabbix
+#  when: zabbix_web and selinux_allow_zabbix_can_http
+#  tags:
+#    - zabbix-server
 
-- name: "RedHat | Enable zabbix_can_network SELinux boolean"
-  seboolean: name={{ item }}
-             state=yes
-             persistent=yes
-  with_items:
-    - zabbix_can_network
-  when: selinux_allow_zabbix_can_network
-  tags:
-    - zabbix-server
+#- name: "RedHat | Enable zabbix_can_network SELinux boolean"
+#  seboolean: name={{ item }}
+#             state=yes
+#             persistent=yes
+#  with_items:
+#    - zabbix_can_network
+#  when: selinux_allow_zabbix_can_network
+#  tags:
+#    - zabbix-server
