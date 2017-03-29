@@ -1,49 +1,12 @@
 Table of Contents
 
-1. [Overview](#overview)
-2. [Requirements for this role](#requirements)
-   * [List of Operating systems](#operating-systems)
-   * [List supported Zabbix versions](#zabbix-version)
-3. [Installing this role](#installation)
-4. [Overview of variables which can be used](#role-variables)
-   * [Main variables](#main-variables)
-   * [Zabbix 3 variables](#zabbix-3)
-   * [Database variables](#databases)
-4. [Dependencies](#dependencies)
-5. [Example of using this role](#example-playbook)
-   * [ Vars in role configuration](#vars-in-role-configuration)
-   * [Combination of group_vars and playbook](#combination-of-group_vars-and-playbook)
-6. [Test Kitchen](#test-kitchen)
-7. [Extra information](#extra-information)
-8. [License](#license)
-9. [Author Information](#author-information)
+暂时只支持Centos7系统
+
+数据库默认使用的是Mariadb
+
+默认安装zabbix 3.0
 
 #Overview
-
-Build Status:
-
-[![Build Status](https://travis-ci.org/dj-wasabi/ansible-zabbix-server.svg?branch=master)](https://travis-ci.org/dj-wasabi/ansible-zabbix-server)
-
-This is an role for installing and maintaining the zabbix-server.
-
-This is one of the 'dj-wasabi' roles which configures your whole zabbix environment. See an list for the complete list:
-
- * zabbix-server (https://galaxy.ansible.com/dj-wasabi/zabbix-server/)
- * zabbix-proxy (https://galaxy.ansible.com/dj-wasabi/zabbix-proxy/)
- * zabbix-javagateway (https://galaxy.ansible.com/dj-wasabi/zabbix-javagateway/)
- * zabbix-agent (https://galaxy.ansible.com/dj-wasabi/zabbix-agent/)
-
-#Requirements
-##Operating systems
-
-This role will work on the following operating systems:
-
- * Red Hat
- * Debian
- * Ubuntu
-
-So, you'll need one of those operating systems.. :-)
-Please sent Pull Requests or suggestions when you want to use this role for other Operating systems.
 
 ##Zabbix Versions
 
@@ -79,19 +42,10 @@ Zabbix 2.4:
   * Ubuntu 12.04 14.04
   * Debian 7
 
-Zabbix 2.2:
-
-  * CentOS 5.x, 6.x
-  * RedHat 5.x, 6.x
-  * OracleLinux 5.x, 6.x
-  * Scientific Linux 5.x, 6.x
-  * Ubuntu 12.04
-  * Debian 7
-  * xenserver 6
 
 #Installation
 
-Installing this role is very simple: `ansible-galaxy install dj-wasabi.zabbix-server`
+Installing this role is very simple: `ansible-playbook -i zabbix zabbix-server.yml`
 
 #Role Variables
 
