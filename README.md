@@ -1,5 +1,5 @@
 Table of Contents
------------------
+=========
 
 暂时只支持Centos7系统
 
@@ -7,10 +7,10 @@ Table of Contents
 
 默认安装zabbix 3.0
 
-#Overview
 
-##Zabbix Versions
 
+Zabbix Versions
+---------------
 See the following list of supported Operating systems with the Zabbix releases:
 
 Zabbix 3.2:
