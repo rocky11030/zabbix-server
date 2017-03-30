@@ -81,7 +81,7 @@
     - zabbix-server
 
 - name: start apache server
-  service: name=httpd state=started
+  service: name=httpd state=started enable=yes
 
 #- name: "RedHat | Install Ansible module dependencies"
 #  yum: name=python-psycopg2
@@ -102,7 +102,7 @@
     - zabbix-server
 
 - name: start mariadb server
-  service: name=mariadb state=started
+  service: name=mariadb state=started enable=yes
   when: database_type == 'mysql' and ansible_distribution_major_version == "7"
 
 - name: "RedHat | Install Mysql Client package RHEL5 - 6"
